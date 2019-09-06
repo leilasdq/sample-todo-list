@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controller.MainFragment"
+    android:background="@drawable/gradiant_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        android:layout_gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/name_edit_text"
+            android:hint="@string/name_hint_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:inputType="text"
+            android:padding="8dp"
+            />
+
+        <EditText
+
+            android:id="@+id/number_of_tasks"
+            android:hint="@string/tasks_number_hint"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:inputType="number"
+            android:padding="8dp"
+            />
+
+        <Button
+            android:id="@+id/build"
+            android:layout_width="200dp"
+            android:layout_marginTop="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Build Todo List"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Homework8</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name_hint_text">name</string>
+    <string name="tasks_number_hint">number of your tasks</string>
+    <string name="snackbar_fill_everything_error_text">Fill all items</string>
+    <string name="add_btn_text">Add to your list</string>
+    <string name="add_to_list">add To List</string>
+    <string name="add_items_to_list">Add items to List</string>
+    <string name="choose_task_state">Choose state of your tasks:</string>
+</resources>

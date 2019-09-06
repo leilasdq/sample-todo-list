@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controller.AddPageFragment"
+    android:background="@drawable/gradiant_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        android:layout_gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/add_name_edit_text"
+            android:hint="@string/name_hint_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:inputType="text"
+            android:padding="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="32dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/choose_task_state"
+                android:textSize="18dp"
+                android:textColor="#000"
+                android:gravity="center|center_vertical"
+                android:layout_marginRight="2dp"/>
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:textAlignment="center"
+                android:tooltipText="@string/choose_task_state"
+                android:hint="@string/tasks_number_hint"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="32dp"
+                android:inputType="number"
+                android:padding="8dp"
+                android:layout_gravity="center"
+                android:gravity="right"
+                tools:ignore="RtlCompat" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/addToListButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="80dp"
+            android:text="@string/add_to_list"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+</FrameLayout>
