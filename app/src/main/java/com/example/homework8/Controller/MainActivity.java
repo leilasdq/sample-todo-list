@@ -23,21 +23,11 @@ public class MainActivity extends SingleFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.mainFragment_container);
-        if (fragment==null) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.mainFragment_container, new MainFragment())
-                    .commit();
-        }
-
     }
 
 
-    public static Intent newIntent(Context context){
-
-        return new Intent(context, MainActivity.class);
-    }
+//    public static Intent newIntent(Context context){
+//
+//        return new Intent(context, MainActivity.class);
+//    }
 }

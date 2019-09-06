@@ -28,14 +28,26 @@ import com.example.homework8.Status;
 
 public class TodoListActivity extends SingleFragmentActivity {
 
-    public static final String END_TEXT = "EndText";
+    public static final String NAME_ARGS = "name args";
+    public static final String COUNT_ARGS = "count args";
     public static TodolistModel todolistModel = new TodolistModel();
     private String TAG = "List Activity";
     static int orientation;
 
     @Override
     public Fragment createFragment() {
-        return new TodoListFragment();
+        TodoListFragment todoListFragment = new TodoListFragment();
+
+        String name = getIntent().getStringExtra(MainFragment.NAME_EDIT_TEXT);
+        int count = getIntent().getIntExtra(MainFragment.NUMBER_OF_LIST_ITEMS, 0);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(NAME_ARGS, name);
+        bundle.putInt(COUNT_ARGS, count);
+
+        todoListFragment.setArguments(bundle);
+
+        return todoListFragment;
     }
 
     @Override

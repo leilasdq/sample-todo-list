@@ -79,10 +79,9 @@ public class TodoListFragment extends Fragment {
 //            newModels = savedInstanceState.getParcelable(LIST_OF_ITEMS);
 //        }
 
-        Intent intent = getActivity().getIntent();
-        name = intent.getStringExtra(MainFragment.NAME_EDIT_TEXT);
+        name = getArguments().getString(TodoListActivity.NAME_ARGS);
         Log.e(TAG, "onCreate: name " + name);
-        listCount = intent.getIntExtra(MainFragment.NUMBER_OF_LIST_ITEMS, 0);
+        listCount = getArguments().getInt(TodoListActivity.COUNT_ARGS);
         Log.e(TAG, "onCreate: count" + listCount );
     }
 
