@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Build Todo List"
+            android:background="@drawable/button_selector"
             android:textAllCaps="false"/>
 
     </LinearLayout>
