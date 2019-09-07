@@ -1,9 +1,5 @@
 package com.example.homework8.Controller;
 
-
-import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,25 +13,22 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.homework8.Model.TodolistModel;
 import com.example.homework8.R;
 import com.example.homework8.Repository.TodoListRepository;
-import com.example.homework8.Status;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,14 +39,17 @@ import java.util.Objects;
 public class TodoListFragment extends Fragment {
     private static final String TAG = "list";
     public static final int TO_ADD_PAGE_REQUEST_CODE = 1;
-    public static final String LIST_OF_ITEMS = "list of items";
-    RecyclerView mRecyclerView;
-    RecyclerView.Adapter mAdapter;
-    String name;
+    public static final String LENGTH_OF_LIST = "length of list";
+    //    public static final String LIST_OF_ITEMS = "list of items";
+//    public static final String LIST_COUNTS = "List counts";
+//    public static final String LIST_FROM_REPOSITORY = "list from repository";
+//    public static final String ADAPTER = "Adapter";
+    private RecyclerView.Adapter mAdapter;
+    private String name;
     public static int listCount;
     private CardView mCardView;
-    List<TodolistModel> todolistModels;
-    List<TodolistModel> newModels = new ArrayList<>();
+    private List<TodolistModel> todolistModels;
+    private List<TodolistModel> newModels = new ArrayList<>();
 
 
     public TodoListFragment() {
@@ -70,19 +66,18 @@ public class TodoListFragment extends Fragment {
     }
 
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if (savedInstanceState != null) {
-//            newModels = savedInstanceState.getParcelable(LIST_OF_ITEMS);
-//        }
-
+        if (savedInstanceState != null) {
+            listCount = savedInstanceState.getInt(LENGTH_OF_LIST);
+        } else {
+            listCount = getArguments().getInt(TodoListActivity.COUNT_ARGS);
+        }
         name = getArguments().getString(TodoListActivity.NAME_ARGS);
         Log.e(TAG, "onCreate: name " + name);
-        listCount = getArguments().getInt(TodoListActivity.COUNT_ARGS);
-        Log.e(TAG, "onCreate: count" + listCount );
+        Log.e(TAG, "onCreate: count" + listCount);
     }
 
     @Override
@@ -92,29 +87,25 @@ public class TodoListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_todo_list, container, false);
 
 
-        mRecyclerView = view.findViewById(R.id.recycle);
+        RecyclerView recyclerView = view.findViewById(R.id.recycle);
 
         if (TodoListActivity.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         } else if (TodoListActivity.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false));
+            recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false));
         }
 
         //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        if (newModels.size()==0)
+        if (newModels.size() == 0)
             todolistModels = TodoListRepository.getInstance(name, listCount).getTodoListRepositories();
         else {
-            for (int i = 0; i < newModels.size() ; i++) {
-                todolistModels.add(newModels.get(i));
-            }
+            todolistModels.addAll(newModels);
+            //listCount+=newModels.size();
         }
 
-//        if (savedInstanceState == null)
-            mAdapter = new TodoAdapter(todolistModels);
-//        else
-//            mAdapter.notifyDataSetChanged();
-        mRecyclerView.setAdapter(mAdapter);
+        mAdapter = new TodoAdapter(todolistModels);
+        recyclerView.setAdapter(mAdapter);
 
         return view;
     }
@@ -136,7 +127,7 @@ public class TodoListFragment extends Fragment {
         menuInflater.inflate(R.menu.actionbar_btn, menu);
     }
 
-    public class TodoViewHolder extends RecyclerView.ViewHolder{
+    public class TodoViewHolder extends RecyclerView.ViewHolder implements Serializable {
 
         private TextView mTextViewName;
         private TextView mTextViewStatus;
@@ -153,7 +144,7 @@ public class TodoListFragment extends Fragment {
             mCardView = itemView.findViewById(R.id.card_view);
         }
 
-        public void bind (TodolistModel todolistModel){
+        public void bind(TodolistModel todolistModel) {
             mTodolistModel = todolistModel;
 
             mTextViewName.setText(mTodolistModel.getName());
@@ -173,7 +164,7 @@ public class TodoListFragment extends Fragment {
         @NonNull
         @Override
         public TodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater =LayoutInflater.from(getActivity());
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
             View view = inflater.inflate(R.layout.list_item_view, parent, false);
             return new TodoViewHolder(view);
         }
@@ -181,8 +172,8 @@ public class TodoListFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull TodoViewHolder holder, int position) {
             holder.bind(mTodoListModelList.get(position));
-            int num = position%2;
-            switch (num){
+            int num = position % 2;
+            switch (num) {
                 case 0:
                     mCardView.setCardBackgroundColor(getResources().getColor(R.color.backGround1));
                     break;
@@ -198,9 +189,9 @@ public class TodoListFragment extends Fragment {
         }
     }
 
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putParcelable(LIST_OF_ITEMS, (Parcelable) newModels);
-//    }
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(LENGTH_OF_LIST, listCount);
+    }
 }

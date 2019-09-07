@@ -141,11 +141,6 @@ public class TodoListActivity extends SingleFragmentActivity {
             TodoListFragment.listCount++;
 
             todolistModel = new TodolistModel();
-
-//            TodoListFragment fragment = TodoListFragment.newInstance();
-//            TodoListRepository.addTodoItem(todolistModel);
-//            fragment.listCount++;
-//            fragment.mAdapter.notifyDataSetChanged();
         }
     }
 }

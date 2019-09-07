@@ -4,12 +4,13 @@ import android.os.Build;
 
 import com.example.homework8.Status;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 import androidx.annotation.RequiresApi;
 
-public class TodolistModel {
+public class TodolistModel implements Serializable {
     private UUID mId;
     private String mName;
     private Status mStatus;
