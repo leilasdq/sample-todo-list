@@ -55,9 +55,6 @@ public class TodoListActivity extends SingleFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE=0
-        //ActivityInfo.SCREEN_ORIENTATION_PORTRAIT=1
-
         orientation = getResources().getConfiguration().orientation;
 
     }
