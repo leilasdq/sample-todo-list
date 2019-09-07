@@ -61,22 +61,9 @@ public class AddPageFragment extends Fragment implements AdapterView.OnItemSelec
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_page, container, false);
 
-        mSpinner = view.findViewById(R.id.spinner);
-        mAddToListButton = view.findViewById(R.id.addToListButton);
-        mAddNameToLstEditText = view.findViewById(R.id.add_name_edit_text);
-        mStatusSpinnerItems = new ArrayList<>();
-
-        mStatusSpinnerItems.add(String.valueOf(Status.DONE));
-        mStatusSpinnerItems.add(String.valueOf(Status.TODO));
-        mStatusSpinnerItems.add(String.valueOf(Status.DOING));
-
-        mSpinner.setOnItemSelectedListener(this);
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, mStatusSpinnerItems);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpinner.setAdapter(dataAdapter);
-
-
+        initViews(view);
+        SpinnerSetup();
+        
         mAddToListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +90,25 @@ public class AddPageFragment extends Fragment implements AdapterView.OnItemSelec
         });
 
         return view;
+    }
+
+    private void SpinnerSetup() {
+        mStatusSpinnerItems.add(String.valueOf(Status.DONE));
+        mStatusSpinnerItems.add(String.valueOf(Status.TODO));
+        mStatusSpinnerItems.add(String.valueOf(Status.DOING));
+
+        mSpinner.setOnItemSelectedListener(this);
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, mStatusSpinnerItems);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(dataAdapter);
+    }
+
+    private void initViews(View view) {
+        mSpinner = view.findViewById(R.id.spinner);
+        mAddToListButton = view.findViewById(R.id.addToListButton);
+        mAddNameToLstEditText = view.findViewById(R.id.add_name_edit_text);
+        mStatusSpinnerItems = new ArrayList<>();
     }
 
     @Override
