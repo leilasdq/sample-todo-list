@@ -52,9 +52,7 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        name = view.findViewById(R.id.name_edit_text);
-        count = view.findViewById(R.id.number_of_tasks);
-        build = view.findViewById(R.id.build);
+        initViews(view);
 
         build.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -75,6 +73,12 @@ public class MainFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void initViews(View view) {
+        name = view.findViewById(R.id.name_edit_text);
+        count = view.findViewById(R.id.number_of_tasks);
+        build = view.findViewById(R.id.build);
     }
 
     public String getName (){

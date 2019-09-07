@@ -63,7 +63,7 @@ public class AddPageFragment extends Fragment implements AdapterView.OnItemSelec
 
         initViews(view);
         SpinnerSetup();
-        
+
         mAddToListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
