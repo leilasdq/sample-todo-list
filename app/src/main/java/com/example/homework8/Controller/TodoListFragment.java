@@ -40,10 +40,6 @@ public class TodoListFragment extends Fragment {
     private static final String TAG = "list";
     public static final int TO_ADD_PAGE_REQUEST_CODE = 1;
     public static final String LENGTH_OF_LIST = "length of list";
-    //    public static final String LIST_OF_ITEMS = "list of items";
-//    public static final String LIST_COUNTS = "List counts";
-//    public static final String LIST_FROM_REPOSITORY = "list from repository";
-//    public static final String ADAPTER = "Adapter";
     private RecyclerView.Adapter mAdapter;
     private String name;
     public static int listCount;
@@ -95,14 +91,7 @@ public class TodoListFragment extends Fragment {
             recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2, RecyclerView.VERTICAL, false));
         }
 
-        //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        if (newModels.size() == 0)
-            todolistModels = TodoListRepository.getInstance(name, listCount).getTodoListRepositories();
-        else {
-            todolistModels.addAll(newModels);
-            //listCount+=newModels.size();
-        }
+        todolistModels = TodoListRepository.getInstance(name, listCount).getTodoListRepositories();
 
         mAdapter = new TodoAdapter(todolistModels);
         recyclerView.setAdapter(mAdapter);
